@@ -1,0 +1,117 @@
+
+
+add composer
+ download
+https://getcomposer.org/Composer-Setup.exe
+
+install 
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === '93b54496392c062774670ac18b134c3b3a95e5a5e5c8f1a9f115f203b75bf9a129d5daa8ba6a13e2cc8a1da0806388a8') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+
+unlink 
+php -r "unlink('composer-setup.php');"
+
+local composer 
+echo @php "%~dp0composer.phar" %*>composer.bat
+
+
+heroku login 
+
+
+php -v
+composer -V
+git --version
+
+craete composer.json
+
+ heroku create
+ git push heroku master
+ heroku ps:scale web=1
+ heroku open
+ 
+ heroku logs --tail
+ Control+c to stop 
+ 
+ create folder name web/index.php
+ 
+ <?php
+require('../vendor/autoload.php');
+$app = new Silex\Application();
+$app['debug'] = true;
+// Register the monolog logging service
+$app->register(new Silex\Provider\MonologServiceProvider(), array(
+  'monolog.logfile' => 'php://stderr',
+));
+// Register view rendering
+$app->register(new Silex\Provider\TwigServiceProvider(), array(
+    'twig.path' => __DIR__.'/views',
+));
+// Our web handlers
+$app->get('/', function() use($app) {
+  $app['monolog']->addDebug('logging output.');
+  return $app['twig']->render('index.twig');
+});
+$app->run();
+
+
+
+create file name Procfile But no extition
+paste 
+web: vendor/bin/heroku-php-apache2 web/
+
+heroku git:remote -a phpuhd2019
+
+git init name
+git add .
+git commit -m "me"
+
+
+
+
+heroku ps:scale web=0
+heroku ps:scale web=1
+
+add this for composer.json  "require" : {
+    "silex/silex": "^2.0.4",
+    "monolog/monolog": "^1.22",
+    "twig/twig": "^2.0",
+    "symfony/twig-bridge": "^3"
+  },
+  "require-dev": {
+    "heroku/heroku-buildpack-php": "*"
+  }
+  
+  
+  add file composer.lock
+  
+  
+  add to composer.json
+   "require": {
+    "php": "^7.2.0"
+  }
+  
+create vendor  
+  composer update
+  
+  git add .
+  git commit -m "m"
+  
+  composer install --no-dev --prefer-dist --optimize-autoloader --no-interaction
+  
+  composer update
+  
+  
+  composer require alrik11es/cowsayphp
+  
+  git add .
+  git commit -m "mes"
+	git push heroku master
+	heroku open cowsay
+	
+	heroku logs --dyno router
+	
+	add .gitignore main and vendor
+  
+  
+
